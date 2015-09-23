@@ -4,8 +4,14 @@ public class Dog {
 	String name;
 	int age;
 	
-	public Dog(String s) {
-		name = s;
+	public Dog(String s) 
+	{	
+		name = s.trim().isEmpty() ? "Doge" : s;
+	}
+	
+	public void say()
+	{
+		System.out.println("Hei! Minun nimeni on " + name);
 	}
 	
 	public String getName() {
@@ -20,10 +26,12 @@ public class Dog {
 		System.out.println("Hau!");
 	}
 	
-	public void speak(String s) {
-		System.out.println("Hei! Minun nimeni on " + name);
-		
-		if (!s.isEmpty())
-			System.out.println(s);
+	public int speak(String s) {
+		if (!s.trim().isEmpty())
+			System.out.println(s.trim());
+		else
+			System.out.println("Much wow!");
+
+		return s.trim().isEmpty() ? 1 : 0;
 	}
 }

@@ -1,27 +1,24 @@
 package main;
 import main.Dog;
-//import java.awt.*;
+import java.awt.*;
+import java.util.*;
 
 public class Mainclass {
     public static void main(String[] args) {
-    	Dog dog = new Dog("Wuff");
-    	//hello
-    	TPoint p = new TPoint(5, 5);
+    	Scanner s = new Scanner(System.in);
     	
-    	p.print();
-    	p.offset(5);
-    	p.print();
-    	p.offset(-5);
-    	p.print();
+    	System.out.print("Anna nimeni: ");
+    	Dog dog = new Dog(s.nextLine());
     	
-    	p.offset(-5, 5);
-    	p.print();
     	
-    	System.out.println(p.distance(new TPoint(4, 4)));
+    	dog.say();
+    	int r = 1;
+    	while (r == 1)
+    	{
+	    	System.out.print("Anna lausahdus: ");
+	    	r = dog.speak(s.nextLine());
+    	}	
     	
-    	p.pos();
-    	p.print();
-    	
-    	dog.speak("hello");
+    	s.close();
     }
 }
