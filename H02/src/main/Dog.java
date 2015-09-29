@@ -27,11 +27,35 @@ public class Dog {
 	}
 	
 	public int speak(String s) {
-		if (!s.trim().isEmpty())
-			System.out.println(s.trim());
+		boolean b;
+		String t;
+		int i;
+		
+		t = s.trim();
+		System.out.println(s.trim());
+
+		if (!t.trim().isEmpty())
+		{	
+			if ((t.toLowerCase().equals("true")) || (t.toLowerCase().equals("false")))
+			{
+				System.out.println("Annoit boolean arvon: " + s);
+				return 1;
+			}
+			
+			try {
+				i = Integer.parseInt(t);
+				System.out.println("Annoit kokonaisluvun: " + s);
+				return 1;
+				} 
+				catch (NumberFormatException e) 
+			{
+				//This is not the place you are looking for.
+			}
+			System.out.println(t.trim());
+		}
 		else
 			System.out.println("Much wow!");
 
-		return s.trim().isEmpty() ? 1 : 0;
+		return t.trim().isEmpty() ? 1 : 0;
 	}
 }

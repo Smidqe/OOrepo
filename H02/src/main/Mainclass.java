@@ -1,6 +1,5 @@
 package main;
 import main.Dog;
-import java.awt.*;
 import java.util.*;
 
 public class Mainclass {
