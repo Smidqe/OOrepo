@@ -1,5 +1,7 @@
 package main;
 
+import java.util.regex.Pattern;
+
 public class Dog {
 	String name;
 	int age;
@@ -27,34 +29,38 @@ public class Dog {
 	}
 	
 	public int speak(String s) {
-		boolean b;
 		String t;
-		int i;
-		
-		t = s.trim();
-		System.out.println(s.trim());
+		String a[];
 
-		if (!t.trim().isEmpty())
-		{	
-			if ((t.toLowerCase().equals("true")) || (t.toLowerCase().equals("false")))
+		if (s.trim().isEmpty())
+		{
+			System.out.println("Much wow!");
+			return 1;
+		}
+		int m = 0;
+		t = s.trim();
+	    a = s.split(Pattern.quote(" "));
+	    for (int i = 0; i < a.length; i++)
+	    {
+			if ((a[i].toLowerCase().equals("true")) || (a[i].toLowerCase().equals("false")))
 			{
-				System.out.println("Annoit boolean arvon: " + s);
-				return 1;
+				System.out.println("Such boolean: " + a[i]);
+				m++;
 			}
 			
 			try {
-				i = Integer.parseInt(t);
-				System.out.println("Annoit kokonaisluvun: " + s);
-				return 1;
+				int j = Integer.parseInt(a[i]);
+				m++;
+				System.out.println("Annoit kokonaisluvun: " + j);
 				} 
 				catch (NumberFormatException e) 
 			{
 				//This is not the place you are looking for.
 			}
+		
+	    }
+		if (m == 0)
 			System.out.println(t.trim());
-		}
-		else
-			System.out.println("Much wow!");
 
 		return t.trim().isEmpty() ? 1 : 0;
 	}

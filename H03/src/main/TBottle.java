@@ -3,24 +3,26 @@ import java.util.*;
 
 public class TBottle {
     
+	
+	
     private int amount;
     // The array for the Bottle-objects
     private ArrayList<TBottle> dm_list;
-    
-    private TBottle[] list;
-    private int money = 0;
+
+    private double money = 0;
     
     private String name;
     private String maker;
     private double volume;
+    private double price;
     
-    public TBottle create(String name, String maker, double volume)
+    public TBottle create(String name, String maker, double volume, double price)
     {
     	TBottle r = new TBottle();
     	r.name = name.isEmpty() ? "Pepsi Max" : name;
     	r.maker = maker.isEmpty() ? "Pepsi" : maker;
     	r.volume = (volume == 0) ? 0.3 : volume;
-    	
+    	r.price = (price == 0) ? 1.8 : price;
     	return r;
     }
     
@@ -32,10 +34,45 @@ public class TBottle {
     	this.amount = bottles;
     	this.money = money;   	
     	
-    	list = new TBottle[bottles];
+    	dm_list = new ArrayList<TBottle>();
     	
     	for (int i = 0; i < this.amount; i++)
-    		list[i] = this.create("", "", 0.0);
+    		dm_list.add(create("", "", 0.0, 0.0));
+    }
+    
+    public TBottle(int money)
+    {
+    	this.amount = 6;
+    	this.money = money;
+    	
+    	dm_list = new ArrayList<TBottle>();
+    	
+    	dm_list.add(create("Pepsi Max", "", 0.5, 1.8));
+    	dm_list.add(create("Pepsi Max", "", 1.5, 2.2));
+    	dm_list.add(create("Coca-Cola Zero", "", 0.5, 2.0));
+    	dm_list.add(create("Coca-Cola Zero", "", 1.5, 2.5));
+    	dm_list.add(create("Fanta Zero", "", 0.5, 1.95));
+    	dm_list.add(create("Fanta Zero", "", 0.5, 1.95));
+    }
+    
+    public void printList(){
+    	for (int i = 0; i < this.amount; i++)
+    		System.out.printf("%d. Nimi: %s\nKoko: %.1f\nHinta: %.2f\n\n", (i + 1), dm_list.get(i).name, dm_list.get(i).volume, dm_list.get(i).price);
+    }
+    
+    public double getprice(int i)
+    {
+    	return dm_list.get(i).price;
+    }
+    
+    public double getVolume(int i)
+    {
+    	return dm_list.get(i).volume;
+    }
+    
+    public String getMaker(int i)
+    {
+    	return dm_list.get(i).maker;
     }
     
     public void addMoney() {
@@ -43,31 +80,38 @@ public class TBottle {
         System.out.println("Klink! Money was added into the machine!");
     }
     
-    public void buyBottle() {
-        if (money < 1)
+    public void buyBottle(int i) {
+        if ((i < 0) || (i > dm_list.size()))
+        	return;
+    	
+    	if (money < 1)
         {
         	System.out.println("Et ole antanut tarpeeksi rahaa!");
         	return;
         }
     	
-        if (amount == 0)
+        if (dm_list.size() == 0)
         {
         	System.out.println("Pullot loppuneet, :(");
         	return;
         }
         
-        if (amount > 0)
-        	System.out.println("Pullon nimi: " + list[0].name);
-
         
+        if (dm_list.size() > 0)
+        	System.out.println("Pullon nimi: " + dm_list.get(i).name);
+
         amount -= 1;
+        money -= dm_list.get(i).price;
+        
+        dm_list.remove(i);
         
         System.out.println("KACHUNK! Bottle appeared from the machine!");
     }
     
     public void returnMoney() {
+
+        System.out.printf("Klink klink. Sinne menivät rahat! Rahaa tuli ulos: %.2f€\n", money);
         money = 0;
-        System.out.println("Klink klink. All money gone!");
     }
 }
 
