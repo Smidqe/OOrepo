@@ -1,5 +1,7 @@
 package main;
 import java.util.*;
+import java.text.*;
+import java.math.*;
 
 public class TBottle {
     
@@ -56,8 +58,10 @@ public class TBottle {
     }
     
     public void printList(){
+    	 DecimalFormat df = new DecimalFormat("#.#0"); df.setRoundingMode(RoundingMode.CEILING);     	
+    	
     	for (int i = 0; i < this.amount; i++)
-    		System.out.printf("%d. Nimi: %s\nKoko: %.1f\nHinta: %.2f\n\n", (i + 1), dm_list.get(i).name, dm_list.get(i).volume, dm_list.get(i).price);
+    		System.out.printf("%d. Nimi: %s\nKoko: %.1f\nHinta: %.2f\n\n", (i + 1), dm_list.get(i).name, dm_list.get(i).volume, df.format(dm_list.get(i).price));
     }
     
     public double getprice(int i)
@@ -101,11 +105,14 @@ public class TBottle {
         	System.out.println("Pullon nimi: " + dm_list.get(i).name);
 
         amount -= 1;
-        money -= dm_list.get(i).price;
-        
-        dm_list.remove(i);
-        
-        System.out.println("KACHUNK! Bottle appeared from the machine!");
+        if (money > dm_list.get(i).price) 
+		{	
+			money -= dm_list.get(i).price;
+			System.out.printf("KACHUNK! %s tipahti masiinasta!\n", dm_list.get(i).name);
+			dm_list.remove(i);
+		}
+		else
+			System.out.println("Syötä rahaa ensin!");
     }
     
     public void returnMoney() {

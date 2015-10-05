@@ -59,7 +59,6 @@ public class Mainclass {
 					break;
 				}
 			}
-			System.out.println();
 		}
 		
 		s.close();
