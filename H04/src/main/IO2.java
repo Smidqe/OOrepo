@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -160,8 +159,7 @@ public class IO2 {
 	{
 		try {
 			ZipFile zipf = new ZipFile(name);
-			FileInputStream file = new FileInputStream(name);
-			ZipInputStream zip = new ZipInputStream(new BufferedInputStream(file));
+			ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(name)));
 			
 			ZipEntry entry;
 			
